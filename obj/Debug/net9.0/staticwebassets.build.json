@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "qxF7OgsTDBENPW5Jvjh52N75hi46ggDuABnpwz0xnpM=",
+  "Source": "EventBookingSystem",
+  "BasePath": "_content/EventBookingSystem",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
