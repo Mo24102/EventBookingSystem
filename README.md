@@ -1,3 +1,4 @@
+
 Event Booking System Backend
 Setup Instructions
 
@@ -34,3 +35,6 @@ Bookings: POST /api/bookings
 
 
 
+=======
+# EventBookingSystem
+>>>>>>> d79381b03d92883b2dfd7e0ef1d6c019f4c17fa0
