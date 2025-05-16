@@ -8,7 +8,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dto",
+        "Name": "model",
         "Type": "EventBookingSystem.DTOs.LoginDto",
         "IsRequired": true
       }
@@ -24,7 +24,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dto",
+        "Name": "model",
         "Type": "EventBookingSystem.DTOs.RegisterDto",
         "IsRequired": true
       }
@@ -32,15 +32,15 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EventBookingSystem.Controllers.BookingController",
-    "Method": "Book",
-    "RelativePath": "api/Booking",
+    "ContainingType": "EventBookingSystem.Controllers.BookingsController",
+    "Method": "CreateBooking",
+    "RelativePath": "api/Bookings",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dto",
+        "Name": "model",
         "Type": "EventBookingSystem.DTOs.BookingDto",
         "IsRequired": true
       }
@@ -48,25 +48,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EventBookingSystem.Controllers.BookingController",
-    "Method": "GetUserBookings",
-    "RelativePath": "api/Booking/user/{userId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "EventBookingSystem.Controllers.EventsController",
-    "Method": "GetAll",
-    "RelativePath": "api/Events",
+    "ContainingType": "EventBookingSystem.Controllers.CategoriesController",
+    "Method": "GetCategories",
+    "RelativePath": "api/Categories",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -75,15 +59,36 @@
   },
   {
     "ContainingType": "EventBookingSystem.Controllers.EventsController",
-    "Method": "Create",
+    "Method": "GetEvents",
+    "RelativePath": "api/Events",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EventBookingSystem.Controllers.EventsController",
+    "Method": "CreateEvent",
     "RelativePath": "api/Events",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "e",
-        "Type": "EventBookingSystem.Models.Event",
+        "Name": "model",
+        "Type": "EventBookingSystem.DTOs.EventDto",
         "IsRequired": true
       }
     ],
@@ -91,7 +96,44 @@
   },
   {
     "ContainingType": "EventBookingSystem.Controllers.EventsController",
-    "Method": "Delete",
+    "Method": "GetEvent",
+    "RelativePath": "api/Events/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EventBookingSystem.Controllers.EventsController",
+    "Method": "UpdateEvent",
+    "RelativePath": "api/Events/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "model",
+        "Type": "EventBookingSystem.DTOs.EventDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EventBookingSystem.Controllers.EventsController",
+    "Method": "DeleteEvent",
     "RelativePath": "api/Events/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,

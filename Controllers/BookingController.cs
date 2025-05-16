@@ -1,47 +1,30 @@
-﻿using EventBookingSystem.DTOs;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using EventBookingSystem.DTOs;
 using EventBookingSystem.Services;
-using Microsoft.AspNetCore.Mvc;
 
 namespace EventBookingSystem.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class BookingController : ControllerBase
+    [ApiController]
+    [Authorize]
+    public class BookingsController : ControllerBase
     {
         private readonly BookingService _bookingService;
-        public BookingController(BookingService bookingService)
+
+        public BookingsController(BookingService bookingService)
         {
             _bookingService = bookingService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Book(BookingDto dto)
+        public async Task<IActionResult> CreateBooking([FromBody] BookingDto model)
         {
-            try
-            {
-                int userId = 1;
-                var booking = await _bookingService.BookEventAsync(userId, dto.EventId);
-                return Ok(new { message = "Booking successful", data = booking });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = "Booking failed", error = ex.Message });
-            }
+            var userId = int.Parse(User.Identity.Name);
+            var created = await _bookingService.CreateBookingAsync(userId, model.EventId);
+            if (!created)
+                return BadRequest("Booking failed.");
+            return Ok();
         }
-
-        [HttpGet("user/{userId}")]
-        public async Task<IActionResult> GetUserBookings(int userId)
-        {
-            try
-            {
-                var bookings = await _bookingService.GetUserBookingsAsync(userId);
-                return Ok(new { message = "Bookings retrieved", data = bookings });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = "Failed to retrieve bookings", error = ex.Message });
-            }
-        }
-
     }
 }

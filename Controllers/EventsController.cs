@@ -1,63 +1,90 @@
-﻿using EventBookingSystem.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using EventBookingSystem.Services;
-using Microsoft.AspNetCore.Mvc;
+using EventBookingSystem.DTOs;
 
 namespace EventBookingSystem.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class EventsController : ControllerBase
     {
         private readonly EventService _eventService;
+
         public EventsController(EventService eventService)
         {
             _eventService = eventService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetEvents([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            try
-            {
-                var events = await _eventService.GetAllEventsAsync();
-                return Ok(new { message = "Events retrieved", data = events });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = "Failed to retrieve events", error = ex.Message });
-            }
+            var events = await _eventService.GetEventsAsync(page, pageSize);
+            return Ok(events);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEvent(int id)
+        {
+            var eventDto = await _eventService.GetEventByIdAsync(id);
+            if (eventDto == null)
+                return NotFound();
+            return Ok(eventDto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Event e)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CreateEvent([FromBody] EventDto model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             try
             {
-                var created = await _eventService.CreateEventAsync(e);
-                return Ok(new { message = "Event created successfully", data = created });
+                var createdEvent = await _eventService.CreateEventAsync(model);
+                return CreatedAtAction(nameof(GetEvent), new { id = createdEvent.Id }, createdEvent);
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
-                return BadRequest(new { message = "Event creation failed", error = ex.Message });
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateEvent(int id, [FromBody] EventDto model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var updated = await _eventService.UpdateEventAsync(id, model);
+                if (!updated)
+                    return NotFound();
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteEvent(int id)
         {
             try
             {
-                var result = await _eventService.DeleteEventAsync(id);
-                if (!result)
-                    return NotFound(new { message = "Event not found" });
-
-                return Ok(new { message = "Event deleted successfully" });
+                var deleted = await _eventService.DeleteEventAsync(id);
+                if (!deleted)
+                    return NotFound();
+                return NoContent();
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
-                return BadRequest(new { message = "Event deletion failed", error = ex.Message });
+                return BadRequest(ex.Message);
             }
         }
-
     }
 }

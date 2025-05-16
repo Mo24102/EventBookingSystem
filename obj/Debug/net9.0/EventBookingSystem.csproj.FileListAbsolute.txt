@@ -10,6 +10,7 @@ F:\Users\m\EventBookingSystem\bin\Debug\net9.0\Azure.Core.dll
 F:\Users\m\EventBookingSystem\bin\Debug\net9.0\Azure.Identity.dll
 F:\Users\m\EventBookingSystem\bin\Debug\net9.0\BCrypt.Net-Next.dll
 F:\Users\m\EventBookingSystem\bin\Debug\net9.0\Humanizer.dll
+F:\Users\m\EventBookingSystem\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 F:\Users\m\EventBookingSystem\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 F:\Users\m\EventBookingSystem\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 F:\Users\m\EventBookingSystem\bin\Debug\net9.0\Microsoft.Build.Locator.dll
@@ -147,6 +148,7 @@ F:\Users\m\EventBookingSystem\obj\Debug\net9.0\EventBookingSystem.AssemblyInfo.c
 F:\Users\m\EventBookingSystem\obj\Debug\net9.0\EventBookingSystem.csproj.CoreCompileInputs.cache
 F:\Users\m\EventBookingSystem\obj\Debug\net9.0\EventBookingSystem.MvcApplicationPartsAssemblyInfo.cs
 F:\Users\m\EventBookingSystem\obj\Debug\net9.0\EventBookingSystem.MvcApplicationPartsAssemblyInfo.cache
+F:\Users\m\EventBookingSystem\obj\Debug\net9.0\EventBookingSystem.sourcelink.json
 F:\Users\m\EventBookingSystem\obj\Debug\net9.0\scopedcss\bundle\EventBookingSystem.styles.css
 F:\Users\m\EventBookingSystem\obj\Debug\net9.0\staticwebassets.build.json
 F:\Users\m\EventBookingSystem\obj\Debug\net9.0\staticwebassets.development.json
