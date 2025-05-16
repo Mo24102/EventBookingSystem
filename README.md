@@ -33,8 +33,3 @@ Auth: POST /api/auth/register, POST /api/auth/login
 Events: GET /api/events, POST /api/events
 Bookings: POST /api/bookings
 
-
-
-=======
-# EventBookingSystem
->>>>>>> d79381b03d92883b2dfd7e0ef1d6c019f4c17fa0
